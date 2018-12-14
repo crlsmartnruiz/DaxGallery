@@ -1,0 +1,194 @@
+/*Para moviles*/
+
+body {
+    background-color: #0e0b16;
+    color: #e7dfdd;
+    padding: 0;
+    margin: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+legend {
+    color: #a239ca;
+    font-weight: bold;
+}
+
+.content {
+    margin: 10px 0;
+}
+
+/*Titulo pagina*/
+
+h2 {
+    color: #a239ca;
+    text-shadow: 2px 2px grey;
+    width: 100%;
+
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+/*Menus*/
+
+.menu {
+    background-color: #0e0b16;
+    border: 1px solid #a239ca;
+    border-radius: 20px;
+    text-align: center;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+li a {
+    display: block;
+    padding: 7px 10px;
+    margin: 0;
+    border-radius: 20px;
+    color: #e7dfdd;
+}
+
+li a:hover {
+    background-color: #a239ca;
+    color:#e7dfdd;
+}
+
+/*Lista imagenes*/
+a.carta {
+    padding: 0;
+}
+
+div.card {
+    background-color: #a239ca;
+    color: #e7dfdd;
+
+    height: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a.carta:hover div.card{
+    background-color: #4717f6;
+}
+
+/*Ver imagen */
+
+
+.img-thumbnail {
+    background-color: #a239ca;
+}
+
+#myCanvas {
+    width: 100%;
+    height: 50px;
+    margin: 0px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+table.table-bordered > tbody > tr > td{
+    border:1px solid #a239ca;
+    margin: 0;
+}
+
+
+.tabla {
+    border: 1px solid #a239ca;
+    border-radius: 20px;
+}
+/*Footer*/
+
+.jumbotron {
+    background-color: #0e0b16;
+    border: 2px solid #a239ca;
+    border-radius: 20px;
+    margin-bottom: 7px;
+}
+
+/*Mensajes*/
+
+.modal {
+    color: black;
+}
+
+/*Botones*/
+
+.grupo-botones {
+    margin: 0px 0;
+}
+
+.btn-group {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.btn {
+    background-color: #4717f6;
+    color: #e7dfdd;
+    margin: 6px 0;
+}
+
+.btn-primary:hover {
+    background-color: #a239ca;
+}
+
+/*Formularios*/
+
+.input-group-prepend {
+    width: 100%;
+}
+
+span {
+    width: 100%;
+    
+}
+
+/*Contador de caracteres*/
+
+span.contador {
+    right: 0;
+}
+
+@media only screen and (min-width: 600px) {
+    body {
+        /*background-color: lightblue;*/
+    }
+
+    footer {
+        margin: 10px 0;
+    }
+
+    .input-group-prepend {
+        width: 25%;
+    }
+    
+    .btn {
+        margin: 0;
+    }
+    
+    #myCanvas {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .grupo-botones {
+        margin-bottom: 7px;
+    }
+    
+    .panel-botones {
+        margin-top: 7px;
+    }
+}
+
