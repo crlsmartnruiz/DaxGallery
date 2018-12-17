@@ -17,11 +17,8 @@ session_start();
         <link rel="stylesheet" type="text/css" href="css/main.css"/>  
     </head>
     <body>
-
         <div class='container'>
-
             <?php include './mensaje-saludo.php'; ?>
-
 
             <?php include './mensaje.php'; ?>
 
@@ -34,7 +31,6 @@ session_start();
                 parse_str($parts['query'], $query);
                 $imagen = findImageByImageId($query['imagen']);
                 ?>
-
 
                 <div class='content col-sm-12 col-md-9 container'>
                     <?php if ($imagen == NULL) { ?>
@@ -119,21 +115,48 @@ session_start();
                                     </td>
 
                                     <td>
-                                        <p><?php echo $imagen->getFecha() ?></p>
+                                        <p>
+                                            <?php
+                                            $fecha = strtotime($imagen->getFecha());
+                                            setlocale(LC_TIME, "es_ES");
+                                            echo strftime("%A, %d de %B de %Y", $fecha);
+                                            ?>
+                                        </p>
                                     </td>
                                 </tr>
                             </table>
+
+
+                        </div>
+
+                        <div class="text-center panel-botones">
+                            <?php
+                            $arrayIds = findAllImageIds();
+
+                            $index = array_search($imagen->getImageId(), $arrayIds);
+
+                            if (isset($index)) {
+                                if (isset($arrayIds[($index - 1) % sizeof($arrayIds)])) {
+                                    ?>
+                                    <a href="ver_imagen.php?imagen=<?php echo $arrayIds[($index - 1) % sizeof($arrayIds)] ?>" class="btn btn-primary">Anterior</a>
+                                    
+                                    <?php
+                                            
+                                }
+
+                                if (isset($arrayIds[($index + 1) % sizeof($arrayIds)])) {                                    
+                                    ?>
+
+                                    <a href="ver_imagen.php?imagen=<?php echo $arrayIds[($index + 1) % sizeof($arrayIds)] ?>" class="btn btn-primary">Siguiente</a>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </div>
                         <?php
                     }
                     ?>  
-
                 </div>
-
-
-
-
-
             </div>
 
             <?php include './footer.php'; ?>   

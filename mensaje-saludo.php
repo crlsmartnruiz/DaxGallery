@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class="mensaje-inicio">
-            <a href="index.php"><h2 class="display-2">DaxGallery</h2></a>
+            <a href="index.php"><h2 class="display-3 text-center">DaxGallery</h2></a>
 
         </div>
     </body>

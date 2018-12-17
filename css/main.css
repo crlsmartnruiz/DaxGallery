@@ -1,5 +1,3 @@
-/*Para moviles*/
-
 body {
     background-color: #0e0b16;
     color: #e7dfdd;
@@ -7,26 +5,35 @@ body {
     margin: 0;
 }
 
-a:hover {
-    text-decoration: none;
+/*Mensajes*/
+.alert {
+    width: 100%;
+    height: fit-content;
 }
 
-legend {
-    color: #a239ca;
-    font-weight: bold;
-}
-
-.content {
-    margin: 10px 0;
+.alert-info {
+    background-color: #a239ca;
+    color: #e7dfdd;
 }
 
 /*Titulo pagina*/
 
+.mensaje-inicio {
+    background-color: #a239ca;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
 h2 {
-    color: #a239ca;
+    color: #4717f6;
     text-shadow: 2px 2px grey;
     width: 100%;
+}
 
+h2:hover {
+    color: #0e0b16;
+    font-size: 80px;
+    overflow-y: visible;
 }
 
 img {
@@ -81,8 +88,6 @@ a.carta:hover div.card{
 }
 
 /*Ver imagen */
-
-
 .img-thumbnail {
     background-color: #a239ca;
 }
@@ -152,7 +157,7 @@ table.table-bordered > tbody > tr > td{
 
 span {
     width: 100%;
-    
+
 }
 
 /*Contador de caracteres*/
@@ -161,11 +166,27 @@ span.contador {
     right: 0;
 }
 
-@media only screen and (min-width: 600px) {
-    body {
-        /*background-color: lightblue;*/
-    }
+/*Para moviles*/
 
+a:hover {
+    text-decoration: none;
+}
+
+legend {
+    color: #a239ca;
+    font-weight: bold;
+}
+
+.content {
+    margin: 10px 0;
+}
+
+a.carta {
+    margin: 10px 0;
+}
+
+/*Para ordenador*/
+@media only screen and (min-width: 600px) {
     footer {
         margin: 10px 0;
     }
@@ -173,22 +194,26 @@ span.contador {
     .input-group-prepend {
         width: 25%;
     }
-    
+
     .btn {
         margin: 0;
     }
-    
+
     #myCanvas {
         margin: 0;
         padding: 0;
     }
-    
+
     .grupo-botones {
         margin-bottom: 7px;
     }
-    
+
     .panel-botones {
         margin-top: 7px;
+    }
+
+    a.carta {
+        margin: 0px 0px;
     }
 }
 

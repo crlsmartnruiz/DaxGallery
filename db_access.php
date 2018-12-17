@@ -36,8 +36,12 @@ function createUser($name, $email, $pass) {
 
 function findUserByEmail($email) {
     $conn = createConnection();
-    $sql = "SELECT * FROM Usuario WHERE email = '$email'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM Usuario WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
 
     if ($result->num_rows == 0) {
         closeConnextion($conn);
@@ -54,8 +58,12 @@ function findUserByEmail($email) {
 
 function findUsuarioByUserID($userId) {
     $conn = createConnection();
-    $sql = "SELECT * FROM Usuario WHERE userId = '$userId'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM Usuario WHERE userId = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
 
     if ($result->num_rows == 0) {
         closeConnextion($conn);
@@ -74,8 +82,6 @@ function createImage($ruta, $desc, $usuario) {
     $sql = "INSERT INTO Imagen (ruta,descripcion,usuario) VALUES (?,?,?)";
     $conn = createConnection();
     $stmt = $conn->prepare($sql);
-    
-    
     $stmt->bind_param("ssi", $ruta, $desc, $usuario);
     $stmt->execute();
     $last_id = $conn->insert_id;
@@ -86,16 +92,21 @@ function createImage($ruta, $desc, $usuario) {
 
 function findImagesByUsuario($userId) {
     $imageArray = [];
+
     $conn = createConnection();
-    $sql = "SELECT * FROM Imagen WHERE usuario = '$userId'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM Imagen WHERE usuario = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
 
     if ($result->num_rows == 0) {
         closeConnextion($conn);
         return NULL;
     } else {
         while ($row = $result->fetch_assoc()) {
-            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["fecha"],$row["usuario"]);
+            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["fecha"], $row["usuario"]);
             array_push($imageArray, $imagen);
         }
         closeConnextion($conn);
@@ -114,7 +125,7 @@ function findAllImages() {
         return NULL;
     } else {
         while ($row = $result->fetch_assoc()) {
-            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"],$row["fecha"], $row["usuario"]);
+            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["fecha"], $row["usuario"]);
             array_push($imageArray, $imagen);
         }
         closeConnextion($conn);
@@ -124,15 +135,19 @@ function findAllImages() {
 
 function findImageByImageId($imageId) {
     $conn = createConnection();
-    $sql = "SELECT * FROM Imagen WHERE `imageId` = '$imageId'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM Imagen WHERE `imageId` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $imageId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
 
     if ($result->num_rows == 0) {
         closeConnextion($conn);
         return NULL;
     } else {
         while ($row = $result->fetch_assoc()) {
-            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"],$row["fecha"], $row["usuario"]);
+            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["fecha"], $row["usuario"]);
         }
         closeConnextion($conn);
         return $imagen;
@@ -140,58 +155,79 @@ function findImageByImageId($imageId) {
 }
 
 function updateLikes($image) {
-    $conn = createConnection();
     $likes = $image->getLikes() + 1;
-    $sql = "UPDATE Imagen SET likes=" . $likes . " WHERE imageId='" . $image->getImageId() . "'";
-    $result = $conn->query($sql);
+    $imageId = $image->getImageId();
+    $conn = createConnection();
 
-    /* if($result === TRUE) {
-      echo "Record updated successfully";
-      }else {
-      echo "Error updating record: " . $conn->error;
-      } */
+    $sql = "UPDATE Imagen SET likes=? WHERE imageId=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $likes, $imageId);
+    $stmt->execute();
+    $stmt->close();
+    closeConnextion($conn);
 }
 
 function updateDislikes($image) {
     $conn = createConnection();
+    $imageId = $image->getImageId();
     $dislikes = $image->getDislikes() + 1;
-    $sql = "UPDATE Imagen SET dislikes=" . $dislikes . " WHERE imageId='" . $image->getImageId() . "'";
-    $result = $conn->query($sql);
-
-    /* if($result === TRUE) {
-      echo "Record updated successfully";
-      }else {
-      echo "Error updating record: " . $conn->error;
-      } */
+    $sql = "UPDATE Imagen SET dislikes=? WHERE imageId=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $dislikes, $imageId);
+    $stmt->execute();
+    $stmt->close();
+    closeConnextion($conn);
 }
 
 function deleteImage($image) {
     $conn = createConnection();
-    $sql = "DELETE FROM Imagen WHERE imageId='" . $image->getImageId() . "'";
-    $result = $conn->query($sql);
-
-    if ($result === TRUE) {
-        echo "Record updated successfully";
-    } else {
-        echo "Error updating record: " . $conn->error;
-    }
+    $sql = "DELETE FROM Imagen WHERE imageId=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $image->getImageId());
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    closeConnextion($conn);
 }
 
-function publicarImagen($image,$codigo) {
+function publicarImagen($image, $codigo) {
     $PUBLICAR = 0;
     $PRIVATIZAR = 1;
-    
+
+    if ($codigo == $PUBLICAR) {
+        $sql = "UPDATE Imagen SET publicada=1 WHERE imageId=?";
+    } else if ($codigo == $PRIVATIZAR) {
+        $sql = "UPDATE Imagen SET publicada=0 WHERE imageId=?";
+    }
+
     $conn = createConnection();
-    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $image->getImageId());
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    closeConnextion($conn);
+}
+
+function findAllImageIds() {
     $conn = createConnection();
+    $sql = "SELECT imageId FROM Imagen WHERE publicada = 1 ORDER BY imageId";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
     
-    if($codigo == $PUBLICAR) {
-        $sql = "UPDATE Imagen SET publicada=1 WHERE imageId='" . $image->getImageId() . "'";
-    }else if($codigo == $PRIVATIZAR) {
-        $sql = "UPDATE Imagen SET publicada=0 WHERE imageId='" . $image->getImageId() . "'";
-    }else {
-        
+    $arrayDeIds = [];
+
+    if ($result->num_rows == 0) {
+        closeConnextion($conn);
+        return NULL;
+    } else {
+        while ($row = $result->fetch_assoc()) {
+            array_push($arrayDeIds, $row["imageId"]);
+        }
+        closeConnextion($conn);
     }
     
-    $result = $conn->query($sql);
+    return $arrayDeIds;
 }
