@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 ?>
 <!DOCTYPE html>
 
@@ -81,7 +81,7 @@ session_start()
                                 <?php
                             } else {
                                 ?>
-                            <p class="col-sm-12 col-md-4 text-center">Dislikes: <?php echo $imagen->getDislikes() ?></p>
+                                <p class="col-sm-12 col-md-4 text-center">Dislikes: <?php echo $imagen->getDislikes() ?></p>
                                 <canvas id='myCanvas' width='200' height='20' class='col-sm-12 col-md-4'></canvas>
                                 <p class="col-sm-12 col-md-4 text-center">Likes: <?php echo $imagen->getLikes() ?></p>
                                 <?php
@@ -119,7 +119,7 @@ session_start()
                                     </td>
 
                                     <td>
-                                        <p>18/08/2018</p>
+                                        <p><?php echo $imagen->getFecha() ?></p>
                                     </td>
                                 </tr>
                             </table>
@@ -147,7 +147,7 @@ session_start()
             const PUBLICAR_IMAGEN = 0;
             const RESUMEN_PUBLICAR_IMAGEN = '¿Publicar imagen?';
             const DETALLE_PUBLICAR_IMAGEN = '¿Está seguro de que desea publicar la imagen? Esta imagen podrá ser vista por todos los usuarios de DaxGallery.';
-            
+
             const PRIVATIZAR_IMAGEN = 2;
             const RESUMEN_PRIVATIZAR_IMAGEN = '¿Publicar imagen?';
             const DETALLE_PRIVATIZAR_IMAGEN = '¿Está seguro de que desea publicar la imagen? Esta imagen podrá ser vista por todos los usuarios de DaxGallery.';
@@ -226,7 +226,7 @@ session_start()
                         cerrarMensaje();
                         window.location.assign("borrar_imagen.php" + location.search);
                     };
-                }else if (codigo == PRIVATIZAR_IMAGEN) {
+                } else if (codigo == PRIVATIZAR_IMAGEN) {
                     resumen.innerHTML = RESUMEN_PRIVATIZAR_IMAGEN;
                     detalle.innerHTML = DETALLE_PRIVATIZAR_IMAGEN;
 

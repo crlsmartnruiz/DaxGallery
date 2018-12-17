@@ -95,7 +95,7 @@ function findImagesByUsuario($userId) {
         return NULL;
     } else {
         while ($row = $result->fetch_assoc()) {
-            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["usuario"]);
+            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["fecha"],$row["usuario"]);
             array_push($imageArray, $imagen);
         }
         closeConnextion($conn);
@@ -114,7 +114,7 @@ function findAllImages() {
         return NULL;
     } else {
         while ($row = $result->fetch_assoc()) {
-            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["usuario"]);
+            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"],$row["fecha"], $row["usuario"]);
             array_push($imageArray, $imagen);
         }
         closeConnextion($conn);
@@ -132,7 +132,7 @@ function findImageByImageId($imageId) {
         return NULL;
     } else {
         while ($row = $result->fetch_assoc()) {
-            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"], $row["usuario"]);
+            $imagen = new imagen($row["imageId"], $row["ruta"], $row["descripcion"], $row["likes"], $row["dislikes"], $row["publicada"],$row["fecha"], $row["usuario"]);
         }
         closeConnextion($conn);
         return $imagen;
