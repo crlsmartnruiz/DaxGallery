@@ -22,6 +22,7 @@ include_once './db_access.php';
     </head>
     <body>
         <?php
+        $error_en_registro = FALSE;
         $name = $email = $pass = "";
 
         if (!isset($_SESSION['usuario'])) {
@@ -34,9 +35,14 @@ include_once './db_access.php';
                 ];
                 $hash = password_hash($pass, PASSWORD_BCRYPT, $options);
                 $nuevoId = createUser($name, $email, $hash);
-                $pathname = "images/" . $nuevoId;
-                mkdir($pathname, "0777", TRUE);
-                header('Location: index.php');
+
+                if ($nuevoId != 0) {
+                    $pathname = "images/" . $nuevoId;
+                    mkdir($pathname, "0777", TRUE);
+                    header('Location: index.php');
+                } else {
+                    $error_en_registro = TRUE;
+                }
             }
         } else {
             echo '<p>Ya ha iniciado</p>';
@@ -62,6 +68,18 @@ include_once './db_access.php';
                     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <fieldset>
                             <legend>Introduzca los datos de registro</legend>
+
+                            <?php
+                            if ($error_en_registro) {
+                                ?>
+                                <div class="alert alert-danger col-12">
+                                    <p><strong>¡Error!</strong> Se ha producido un error. El correo electrónico con el que desea registrarse ya está en uso.</p>
+                                </div>
+                                <?php
+                                
+                                $error_en_registro = FALSE;
+                            }
+                            ?>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend" >
