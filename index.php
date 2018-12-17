@@ -28,26 +28,40 @@ include_once './db_access.php';
             <div class='row'>
                 <?php include './menus.php'; ?>     
 
-                <?php
-                $url = $_SERVER['REQUEST_URI'];
-                $parts = parse_url($url);
-                if (isset($parts['query'])) {
-                    parse_str($parts['query'], $query);
+                <div class="col-sm-12 col-md-9">
+                    <?php
+                    $offset = 6;
+                    $url = $_SERVER['REQUEST_URI'];
+                    $parts = parse_url($url);
 
-                    //Se llama a mostrar solo las fotos privadas
-                    if ($query['propias'] == 1) {
-                        if (isset($_SESSION["usuario"])) {
-                            $arrayImagenes = findImagesByUsuario($_SESSION["usuario"]);
+                    //Imagenes propias
+                    if (isset($parts['query'])) {
+                        parse_str($parts['query'], $query);
+
+                        //Se llama a mostrar solo las fotos privadas
+                        if ($query['propias'] == 1) {
+                            if (isset($_SESSION["usuario"])) {
+                                $arrayImagenes = findImagesByUsuario($_SESSION["usuario"], $offset);
+                                ?>
+
+                                <div id="lista-imagenes" class='lista-imagenes content row'>
+                                    <?php recorrerArray($arrayImagenes); ?>
+                                </div>
+
+                                <?php
+                            } else {//Si no hay usuario con sesion iniciada
+                                ?>
+                                <div id="lista-imagenes" class='lista-imagenes content row'>
+                                    <div class="alert alert-danger col-12">
+                                        <p><strong>¡Error!</strong> Se ha producido un error. Por favor, vuelva a la página principal</p>
+                                        <input type="button" onclick="goToIndex()" value="Volver a la página principal"/>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        } else {
                             ?>
-
-                            <div class='lista-imagenes content col-sm-12 col-md-9 row'>
-                                <?php recorrerArray($arrayImagenes); ?>
-                            </div>
-
-                            <?php
-                        } else {//Si no hay usuario con sesion iniciada
-                            ?>
-                            <div class='lista-imagenes content col-sm-12 col-md-9 row'>
+                            <div id="lista-imagenes" class='lista-imagenes content row'>
                                 <div class="alert alert-danger col-12">
                                     <p><strong>¡Error!</strong> Se ha producido un error. Por favor, vuelva a la página principal</p>
                                     <input type="button" onclick="goToIndex()" value="Volver a la página principal"/>
@@ -55,25 +69,21 @@ include_once './db_access.php';
                             </div>
                             <?php
                         }
+                        //Imagenes públicas
                     } else {
+                        $arrayImagenes = findAllImages($offset);
                         ?>
-                        <div class='lista-imagenes content col-sm-12 col-md-9 row'>
-                            <div class="alert alert-danger col-12">
-                                <p><strong>¡Error!</strong> Se ha producido un error. Por favor, vuelva a la página principal</p>
-                                <input type="button" onclick="goToIndex()" value="Volver a la página principal"/>
-                            </div>
+                        <div id="lista-imagenes" class='lista-imagenes content row'>
+                            <?php recorrerArray($arrayImagenes); ?>
                         </div>
                         <?php
                     }
-                } else {
-                    $arrayImagenes = findAllImages();
                     ?>
-                    <div class='lista-imagenes content col-sm-12 col-md-9 row'>
-                        <?php recorrerArray($arrayImagenes); ?>
+
+                    <div class="panel-botones col-12 text-center">
+                        <input type="button" value="Cargar más" onclick="cargarMas()" class="btn"/>
                     </div>
-                    <?php
-                }
-                ?>
+                </div>
             </div>
 
             <?php include './footer.php'; ?>
@@ -81,8 +91,25 @@ include_once './db_access.php';
             <!--<script src="javascript/general.js" type="text/javascript"/>-->
 
             <script>
+                offset = 6;
+
                 function goToIndex() {
                     window.location.href = 'index';
+                }
+
+                function cargarMas() {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            //console.log(this.responseText);
+                            document.getElementById("lista-imagenes").innerHTML = this.responseText;
+                        }
+                    };
+                    console.log('Llamado ' + offset);
+                    offset = offset + 3;
+                    xmlhttp.open("GET", "cargar_mas.php?offset=" + offset, true);
+                    console.log('Llamado ' + offset);
+                    xmlhttp.send();
                 }
             </script>
 

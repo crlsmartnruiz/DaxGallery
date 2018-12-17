@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-12-2018 a las 13:24:27
+-- Tiempo de generación: 17-12-2018 a las 21:07:35
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 5.6.35
 
@@ -36,17 +36,11 @@ CREATE TABLE IF NOT EXISTS `imagen` (
   `likes` int(11) NOT NULL DEFAULT '0',
   `dislikes` int(11) NOT NULL DEFAULT '0',
   `publicada` tinyint(1) NOT NULL DEFAULT '0',
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `usuario` int(11) NOT NULL,
   PRIMARY KEY (`imageId`),
   KEY `usuario` (`usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `imagen`
---
-
-INSERT INTO `imagen` (`imageId`, `ruta`, `descripcion`, `likes`, `dislikes`, `publicada`, `usuario`) VALUES
-(59, 'images/23/4100888-drift-wallpaper.jpeg', 'YRRYRTYRT', 9, 6, 1, 23);
+) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -62,17 +56,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `pass` varchar(256) NOT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`userId`, `nombre`, `email`, `pass`) VALUES
-(25, 'Carlos MartÃ­n Ruiz', 'crlsmartnruiz@gmail.com8798', '$2y$11$1.mJeGUonxj.2LBfS4Xacu8JxscgOMAmGXUHZ140Mq708NC.bFSFG'),
-(23, 'AndrÃ©s PÃ©rez', 'andres@correo.com', '$2y$11$mbv/V8jgJakWw10McHCtBOImVLo0.HuSy87jZW//FW5QUx/0sfr66'),
-(24, 'Carlos MartÃ­n Ruiz', 'crlsmartnruiz@gmail.com', '$2y$11$u6P2ujjlY0/axajKuwbaE.JLWt/ODqR/doDLoEFq9ZLSU/DQVLf8u'),
-(26, 'Carlos MartÃ­n Ruiz', 'crlsmartnruiz@gmail.comfsf', '$2y$11$5RXgRLtuRMYdyBPvUIDZrew2iVbpgJecrnWvaId5D/wR3GW73Z5lK');
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

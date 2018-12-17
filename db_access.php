@@ -90,13 +90,12 @@ function createImage($ruta, $desc, $usuario) {
     return $last_id;
 }
 
-function findImagesByUsuario($userId) {
+function findImagesByUsuario($userId,$offset) {    
     $imageArray = [];
-
     $conn = createConnection();
-    $sql = "SELECT * FROM Imagen WHERE usuario = ?";
+    $sql = "SELECT * FROM Imagen WHERE usuario = ? ORDER BY fecha LIMIT 0,?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
+    $stmt->bind_param("ii", $userId,$offset);
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
@@ -114,11 +113,15 @@ function findImagesByUsuario($userId) {
     }
 }
 
-function findAllImages() {
+function findAllImages($offset) {
     $imageArray = [];
     $conn = createConnection();
-    $sql = "SELECT * FROM Imagen WHERE publicada=1";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM Imagen WHERE publicada=1 ORDER BY fecha LIMIT 0,?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $offset);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
 
     if ($result->num_rows == 0) {
         closeConnextion($conn);

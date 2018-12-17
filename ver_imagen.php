@@ -133,22 +133,23 @@ session_start();
                             <?php
                             $arrayIds = findAllImageIds();
 
-                            $index = array_search($imagen->getImageId(), $arrayIds);
+                            if ($arrayIds != NULL) {
+                                $index = array_search($imagen->getImageId(), $arrayIds);
 
-                            if (isset($index)) {
-                                if (isset($arrayIds[($index - 1) % sizeof($arrayIds)])) {
-                                    ?>
-                                    <a href="ver_imagen.php?imagen=<?php echo $arrayIds[($index - 1) % sizeof($arrayIds)] ?>" class="btn btn-primary">Anterior</a>
-                                    
-                                    <?php
-                                            
-                                }
+                                if (isset($index)) {
+                                    if (isset($arrayIds[($index - 1) % sizeof($arrayIds)])) {
+                                        ?>
+                                        <a href="ver_imagen.php?imagen=<?php echo $arrayIds[($index - 1) % sizeof($arrayIds)] ?>" class="btn btn-primary">Anterior</a>
 
-                                if (isset($arrayIds[($index + 1) % sizeof($arrayIds)])) {                                    
-                                    ?>
+                                        <?php
+                                    }
 
-                                    <a href="ver_imagen.php?imagen=<?php echo $arrayIds[($index + 1) % sizeof($arrayIds)] ?>" class="btn btn-primary">Siguiente</a>
-                                    <?php
+                                    if (isset($arrayIds[($index + 1) % sizeof($arrayIds)])) {
+                                        ?>
+
+                                        <a href="ver_imagen.php?imagen=<?php echo $arrayIds[($index + 1) % sizeof($arrayIds)] ?>" class="btn btn-primary">Siguiente</a>
+                                        <?php
+                                    }
                                 }
                             }
                             ?>
