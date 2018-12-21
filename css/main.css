@@ -78,13 +78,17 @@ div.card {
     background-color: #a239ca;
     color: #e7dfdd;
 
-    height: 400px;
+    height: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 a.carta:hover div.card{
     background-color: #4717f6;
+}
+
+.lista-imagenes {
+    margin-bottom: 0px;
 }
 
 /*Ver imagen */
@@ -151,19 +155,12 @@ table.table-bordered > tbody > tr > td{
 
 /*Formularios*/
 
-.input-group-prepend {
+.input-group-prepend{
     width: 100%;
 }
 
 span {
     width: 100%;
-
-}
-
-/*Contador de caracteres*/
-
-span.contador {
-    right: 0;
 }
 
 /*Para moviles*/
@@ -189,10 +186,6 @@ a.carta {
 @media only screen and (min-width: 600px) {
     footer {
         margin: 10px 0;
-    }
-
-    .input-group-prepend {
-        width: 25%;
     }
 
     .btn {

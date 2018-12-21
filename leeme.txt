@@ -1,0 +1,19 @@
+INSTALACIÓN:
+Para poder ejecutar la aplicación en local, será necesario disponer de XAMPP O WAMP.
+1. Se deberá mover la carpeta con nombre "Galeria" al directorio "C://wamp64/www" en caso de WAMP o a “C:/xampp/htdocs” en el caso de XAMPP.
+2. Para poder cargar la base de datos, solo será necesario cargar el script SQL situado en la carpeta "Database" en una base de datos llamada "daxgallery".
+3. El usuario para acceder a MySQL debe ser "root" y la contraseña "".
+En caso contrario solo será necesario modificar los parámetros del fichero "db_access.php".
+
+Una vez hecho esto, la URL con la deberá acceder será "http://localhost/Galeria".
+
+CONSIDERACIONES:
+1. La base de datos está completamente vacía. Deberá registrarse y después iniciar sesión para poder subir imágenes.
+2. Una vez hecho esto, deberá subir al menos 7 fotos para poder probar la funcionalidad de "Cargar más".
+3. La funcionalidad de los likes y dislikes está pensada para que cada usuario pueda dar la cantidad de likes y dislikes que considere en cada foto.
+4. En la tabla de datos de cada imagen aparece la fecha de subida. La fecha debería aparecer en español, pero no he conseguido que funcione la función "setlocale".
+5. Deberá dar likes y dislikes para poder ver la funcionalidad completa de la aplicación.
+6. He tenido problemas con la colocación de la etiqueta <script> para importar el fichero "general.js". Asique he optado por poner el código Javascript en cada fichero HTML, aunque no sea lo correcto por temas de reutilización de código.
+7. Deberá probar a cerrar la pestaña del navegador habiendo dejado la sesión iniciado para poder ver la funcionalidad completa de la aplicación.
+
+La aplicación ha sido enteramente desarrollada por Carlos Martín Ruiz.

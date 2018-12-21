@@ -2,19 +2,12 @@
 session_start();
 ?>
 <!DOCTYPE html>
-
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Ver imagen - DaxGallery</title>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" type="text/css" href="css/main.css"/>  
+        <?php include_once 'head_template.php'; ?>
     </head>
     <body>
         <div class='container'>
@@ -72,8 +65,6 @@ session_start();
                                     <canvas id='myCanvas' width='200' height='20' class='col-sm-12 col-md-4'></canvas>
                                     <input type='button' value='Likes: <?php echo $imagen->getLikes() ?>' onclick='like(<?php echo $imagen->getImageId() ?>);pintarCanvas()' id='btnLike' class='btn col-sm-12 col-md-4'/>
                                 </div>
-
-
                                 <?php
                             } else {
                                 ?>
@@ -84,7 +75,6 @@ session_start();
                             }
                             ?>
                         </div>
-
 
                         <div class = 'tabla table-responsive'>
                             <table id = 'datos' class='table table-bordered'>
@@ -125,8 +115,6 @@ session_start();
                                     </td>
                                 </tr>
                             </table>
-
-
                         </div>
 
                         <div class="text-center panel-botones">
@@ -140,10 +128,8 @@ session_start();
                                     if (isset($arrayIds[($index - 1) % sizeof($arrayIds)])) {
                                         ?>
                                         <a href="ver_imagen.php?imagen=<?php echo $arrayIds[($index - 1) % sizeof($arrayIds)] ?>" class="btn btn-primary">Anterior</a>
-
                                         <?php
                                     }
-
                                     if (isset($arrayIds[($index + 1) % sizeof($arrayIds)])) {
                                         ?>
 
@@ -317,13 +303,16 @@ session_start();
                 document.getElementById("btnDislike").value = "Dislikes: " + dislikes;
             }
 
+            function goToIndex() {
+                window.location.href = 'index';
+            }
+
+
             window.onload = function () {
                 pintarCanvas();
             }
 
         </script>
-
         <!--<script src="javascript/general.js"/>-->
-
     </body>
 </html>

@@ -1,9 +1,4 @@
 <?php
-/**
- * Description of imagen
- *
- * @author Admin
- */
 class imagen {
     private $imageId;
     private $ruta;

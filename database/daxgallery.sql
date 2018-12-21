@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 17-12-2018 a las 21:07:35
+-- Tiempo de generación: 21-12-2018 a las 17:06:40
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 5.6.35
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `imagen` (
   `usuario` int(11) NOT NULL,
   PRIMARY KEY (`imageId`),
   KEY `usuario` (`usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `pass` varchar(256) NOT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

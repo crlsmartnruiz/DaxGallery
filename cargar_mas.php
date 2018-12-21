@@ -2,11 +2,11 @@
 session_start();
 include_once './db_access.php';
 
+$arrayImagenes = [];
 $parts = parse_url($_SERVER["REQUEST_URI"]);
 parse_str($parts['query'], $query);
 $offset = $query["offset"];
 
-$arrayImagenes = [];
 
 if (!isset($_SESSION["usuario"])) {
     //Llamar a imagenes públicas
@@ -32,7 +32,6 @@ foreach ($arrayImagenes as $image) {
             </div>
         </div>
     </a>
-
     <?php
 }
 

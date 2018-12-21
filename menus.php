@@ -2,11 +2,6 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    </head>
     <body>
         <div class="col-sm-12 col-md-3">
             <?php
@@ -22,21 +17,25 @@
                         <ul class='col-12' style='padding: 0'>
                             <li>
                                 <a href='index.php'>
+                                    <i class="fas fa-eye"></i>
                                     Ver imágenes públicas
                                 </a>
                             </li>
                             <li>
                                 <a href='index.php?propias=1'>
+                                    <i class="fas fa-lock"></i>
                                     Ver imágenes propias
                                 </a>
                             </li>
                             <li>
                                 <a href='subir_imagen.php'>
+                                    <i class="fas fa-cloud-upload-alt"></i>
                                     Subir imagen
                                 </a>
                             </li>
                             <li>
                                 <a href='cerrar_sesion.php'>
+                                    <i class="fas fa-times-circle"></i>
                                     Cerrar sesión
                                 </a>
                             </li>
@@ -56,11 +55,13 @@
                         <ul class='col-12' style='padding: 0'>
                             <li>
                                 <a href='inicio_sesion.php'>
+                                    <i class="fas fa-lock-open"></i>
                                     Iniciar sesión
                                 </a>
                             </li>
                             <li>
                                 <a href='registro.php'>
+                                    <i class="fas fa-registered"></i>
                                     Registrarse
                                 </a>
                             </li>
